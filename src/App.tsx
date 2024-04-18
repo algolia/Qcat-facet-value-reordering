@@ -28,7 +28,7 @@ export function App() {
 
   return (
     <div>
-      <Header setEnableQcat={setEnableQcat} />
+      <Header setEnableQcat={setEnableQcat} enableQcat={enableQcat} />
       <div className="container">
         <InstantSearch searchClient={searchClient} indexName={indexName}>
           <Configure hitsPerPage={8} />
