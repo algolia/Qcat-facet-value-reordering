@@ -25,7 +25,6 @@ const indexName = 'instant_search_facet_values_reordering_Qcat';
 
 export function App() {
   const [enableQcat, setEnableQcat] = useState(false);
-
   return (
     <div>
       <Header setEnableQcat={setEnableQcat} enableQcat={enableQcat} />
@@ -61,6 +60,7 @@ export function App() {
             </div>
             <div className="search-panel__results">
               <SearchBox placeholder="Search" />
+              <p>TEST</p>
               <Hits hitComponent={Hit} />
               <Pagination className="pagination" />
             </div>

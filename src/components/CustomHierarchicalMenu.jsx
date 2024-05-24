@@ -27,7 +27,6 @@ export const CustomHierarchicalMenu = ({
     limit: limit,
   });
   const sortedItems = useFacetValueReordering(items, enableQcat);
-
   return (
     <FacetPanel header={header} openByDefault={openByDefault}>
       <>

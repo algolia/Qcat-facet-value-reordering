@@ -11,6 +11,7 @@ import { useQueryCategories } from './useQueryCategories';
 const useFacetValueReordering = (items, enableQcat) => {
   // Fetch the query categories using a custom hook.
   const queryCategories = useQueryCategories();
+  console.log('Query categories:', queryCategories);
 
   /**
    * Prepares an array of category values with their corresponding ranks.
@@ -20,16 +21,18 @@ const useFacetValueReordering = (items, enableQcat) => {
    * @returns {Array} An array of objects, each containing a category value and its rank.
    */
   const prepareRankedCategories = () => {
-    // Check if there are any query categories to process.
-    if (!queryCategories.length || !queryCategories[0].hierarchyPath.length) {
+    if (!queryCategories.length) {
       return [];
     }
-    return queryCategories[0].hierarchyPath
-      .map(({ facetValue }) => ({
+
+    const rankedCategories = queryCategories.flatMap(({ hierarchyPath }) =>
+      hierarchyPath.map(({ facetValue }) => ({
         value: facetValue.toLowerCase(), // Convert the category value to lowercase for case-insensitive comparison.
         rank: facetValue.split('>').length, // Determine the rank based on the depth of hierarchy.
       }))
-      .sort((a, b) => b.rank - a.rank); // Sort categories by rank in descending order so deeper categories come first.
+    );
+
+    return rankedCategories.sort((a, b) => b.rank - a.rank); // Sort categories by rank in descending order so deeper categories come first.
   };
 
   /**
